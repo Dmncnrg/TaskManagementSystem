@@ -2,6 +2,7 @@
 /*
 
 *******************************NOTES***************************************
+- Website URL: localhost/taskmanagementsystem
 - call niyo lang si Task_Model if mag-access ng Model (no need na yung $this->load->model('Task_Model');)
 - no need na ideclare yung mga $this->load->library('session'); / $this->load->library('form_validation'); / $this->load->helper(array('form', 'url'));
 
@@ -49,8 +50,8 @@ class TaskManager extends CI_Controller{
     }
 
     public function check_table(){ //run this para macheck yung table (localhost/taskmanagementsystem/taskmanager/check_table)
-        print($this->Task_Model->count_fetch_data());
-        $data['info'] = $this->Task_Model->check_data();
+        echo "Count: ".$this->Task_Model->count_fetch_data()."<br>"; //change table niyo na lang sa model if user or task table
+        $data['info'] = $this->Task_Model->show_data(); //change table niyo na lang sa model if user or task table
         $this->load->view('table_content',$data);
     }
         public function profile(){
