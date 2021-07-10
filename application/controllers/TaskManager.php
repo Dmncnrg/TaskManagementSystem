@@ -55,7 +55,8 @@ class TaskManager extends CI_Controller{
         $this->load->view('table_content',$data);
     }
         public function profile(){
-        $this->load->view('view_profile');
+            $data['info'] = $this->Task_Model->show_data();
+            $this->load->view('view_profile',$data);
         }
 }
 ?>
