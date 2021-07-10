@@ -42,21 +42,9 @@ $contact = $userinfo[4]; $email = $userinfo[5];
                 --> 
             </div> 
             <div class="col admindet-2"> 
-                <img src="" height="200" width="200"> Preview 
+                <img src="" height="200" width="200">
             </div> 
         </div> 
-        <div class="upload_img"> 
-            <h1>-Upload Image-</h1> 
-            <?php 
-            /*if(isset($error)){ 
-                echo '<p class="error_message">'.$error.'</p>'; 
-                } 
-                */
-                ?>
-                <form enctype="multipart/form-data" method="post"> 
-                <input type="file" name="image" required><br> 
-                <input type="submit" value="Upload Image" name="Upload"> 
-            </form> 
         </div>
      </div> 
     </div> 
