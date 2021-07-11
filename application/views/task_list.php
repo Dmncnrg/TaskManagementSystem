@@ -28,8 +28,9 @@
         <div class="col-2 px-1 bg-light position-fixed tasknav" id="sticky-sidebar">
           <div class="container-fluid">
             <a href="#" class="navbar-brand">Task Management System</a>
-            <div class="row-auto">
-                Image Here
+            <div class="row-auto flex-row align-content-center">
+                <img class="rounded-circle" src="../images/profile_default.jpg" width="150" height="150">
+                <h2>Username</h2>
               </div>
               <div class="row-auto">
                 <nav class="navbar navbar-text">

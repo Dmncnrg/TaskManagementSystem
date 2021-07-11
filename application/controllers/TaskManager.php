@@ -94,9 +94,6 @@ class TaskManager extends CI_Controller{
         //$this->load->view('AdminView',$data);
         $this->load->view('task_list');
     }
-    public function profile(){
-        $this->load->view('view_profile');
-    }
     public function create_task(){
 
     }
