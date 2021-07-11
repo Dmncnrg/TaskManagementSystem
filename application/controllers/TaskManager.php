@@ -50,6 +50,7 @@ class TaskManager extends CI_Controller{
             $this->Task_Model->insert_user_data($data);
             //redirect(); sa login
         }
+    }
     // check if username already exist when registering
     public function register_user_check(){
         if ($this->Task_Model->register_user_exist())  
