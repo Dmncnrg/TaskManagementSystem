@@ -3,10 +3,8 @@
         <title>Registration Form</title>
     </head>
 <body>
-    <?php 
-    echo validation_errors(); 
-    ?>
     <div>
+        <?php echo validation_errors(); ?>
         <form action="" method="post">
             <h1>Register</h1>
             <b>First Name</b> <br>

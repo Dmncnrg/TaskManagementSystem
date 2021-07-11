@@ -4,9 +4,7 @@
     </head>
 <body>
     <div>
-        <?php 
-         echo validation_errors(); 
-        ?>
+        <?php echo validation_errors(); ?>
         <b>Login Page</b><br>
         <form action="" method="post">
             <b>Username</b><br><input type="text" name="user" value=""><br>
