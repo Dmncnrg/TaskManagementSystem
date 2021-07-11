@@ -28,6 +28,12 @@ class Task_Model extends CI_Model{
             return true;  
         } 
     }
+    //save user on session after login
+    public function get_user($user){
+        $this->db->where('username',$user);
+        return $this->db->get('tbl_user')->result();
+    }
+
 
     public function count_fetch_data(){ //pangtest lang kung ilan na laman ng table
         $query = $this->db->get('tbl_user'); //change niyo lang table name if user or task table
