@@ -1,6 +1,34 @@
 <?php
 
 class Task_Model extends CI_Model{
+    // insert from register
+    public function insert_user_data($data){
+        $this->db->insert('tbl_user',$data);
+    }
+    // check if login and password is correct
+    public function login_user_exist(){
+        $this->db->where('username', $this->input->post('user'));  
+        $this->db->where('password', $this->input->post('pw'));  
+        $query = $this->db->get('tbl_user');  
+        if ($query->num_rows() == 1)  
+        {  
+            return true;  
+        } else {  
+            return false;  
+        }  
+    }
+    // check if the username already exist
+    public function register_user_exist(){
+        $this->db->where('username', $this->input->post('user'));
+        $query = $this->db->get('tbl_user');  
+        if ($query->num_rows() == 1)  
+        {  
+            return false;  
+        } else {  
+            return true;  
+        } 
+    }
+
     public function count_fetch_data(){ //pangtest lang kung ilan na laman ng table
         $query = $this->db->get('tbl_user'); //change niyo lang table name if user or task table
         return $query->num_rows();
