@@ -11,7 +11,7 @@
     // Uncomment niyo na lang yung need niyo
 
     //      USER TABLE
-    /*
+    
     foreach($info as $i){
         echo "id: ".$i->id."<br>";
         echo "fname: ".$i->fname."<br>";
@@ -20,7 +20,7 @@
         echo "password: ".$i->password."<br>";
         echo "email: ".$i->email."<br>";
         echo "profile_pic: ".$i->profile_pic."<br>";
-    }*/
+    }
 
     //      TASK TABLE
     /*
