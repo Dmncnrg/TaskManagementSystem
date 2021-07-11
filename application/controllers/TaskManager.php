@@ -8,12 +8,58 @@
 
 */
 class TaskManager extends CI_Controller{
-    public function index(){ //first screen natin yung login
-
-        $this->load->view('login');
+    // login screen
+    public function index(){ 
+        $this->form_validation->set_rules('user', 'Username', 'trim|required|callback_login_user_check');
+        $this->form_validation->set_rules('pw', 'Password', 'trim|required');
+        if ($this->form_validation->run() == FALSE){
+            $this->load->view('login');
+        }else{
+            $this->session->set_userdata(array('username' => $this->input->post('user')));
+            //redirect(); sa homepage?
+        }
     }
+    // check if user and password is correct
+    public function login_user_check(){
+        if ($this->Task_Model->login_user_exist())  
+        {  
+            return true;  
+        } else {  
+            $this->form_validation->set_message('login_user_check', 'Invalid username or password!');  
+            return false;  
+        }  
+    }
+    // register screen
     public function register(){
-        $this->load->view('register');
+        $this->form_validation->set_rules('fname', 'First name', 'trim|required|alpha');
+        $this->form_validation->set_rules('lname', 'Last name', 'trim|required|alpha');
+        $this->form_validation->set_rules('user', 'Username', 'trim|required|min_length[6]|alpha_numeric|callback_register_username_check');
+        $this->form_validation->set_rules('pw', 'Password', 'trim|required|min_length[8]');
+        $this->form_validation->set_rules('cpw', 'Password Confirmation', 'trim|required|matches[pw]');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[8]');
+        if ($this->form_validation->run() == FALSE){
+            $this->load->view('register');
+        }else{
+             $data = array(
+                'fname'=>$this->input->post('fname'),
+                'lname'=>$this->input->post('lname'),
+                'username'=>$this->input->post('user'),
+                'password'=>$this->input->post('pw'),
+                'email'=>$this->input->post('email')
+            );
+            $this->Task_Model->insert_user_data($data);
+            //redirect(); sa login
+        }
+    }
+    // check if username already exist when registering
+    public function register_user_check(){
+        if ($this->Task_Model->register_user_exist())  
+        {  
+            return true;  
+        } else {  
+            $this->form_validation->set_message('register_username_check', 'Username already exist');  
+            return false;  
+        }  
     }
     public function tasks($offset=0){
         $config['base_url']=base_url().'/TaskManager/tasks/';
