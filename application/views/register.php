@@ -4,7 +4,7 @@
     </head>
 <body>
     <?php 
-    //echo validation_errors(); 
+    echo validation_errors(); 
     ?>
     <div>
         <form action="" method="post">

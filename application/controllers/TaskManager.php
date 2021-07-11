@@ -16,7 +16,7 @@ class TaskManager extends CI_Controller{
             $this->load->view('login');
         }else{
             $this->session->set_userdata(array('username' => $this->input->post('user')));
-            //redirect(); sa homepage?
+            redirect(base_url()."TaskManager/tasks");
         }
     }
     // check if user and password is correct
@@ -31,12 +31,12 @@ class TaskManager extends CI_Controller{
     }
     // register screen
     public function register(){
-        $this->form_validation->set_rules('fname', 'First name', 'trim|required|alpha');
-        $this->form_validation->set_rules('lname', 'Last name', 'trim|required|alpha');
-        $this->form_validation->set_rules('user', 'Username', 'trim|required|min_length[6]|alpha_numeric|callback_register_username_check');
-        $this->form_validation->set_rules('pw', 'Password', 'trim|required|min_length[8]');
+        $this->form_validation->set_rules('fname', 'First name', 'trim|required|callback_alpha_space');
+        $this->form_validation->set_rules('lname', 'Last name', 'trim|required|callback_alpha_space');
+        $this->form_validation->set_rules('user', 'Username', 'trim|required|min_length[5]|alpha_numeric|callback_register_user_check');
+        $this->form_validation->set_rules('pw', 'Password', 'trim|required|min_length[6]');
         $this->form_validation->set_rules('cpw', 'Password Confirmation', 'trim|required|matches[pw]');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[8]');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[8]|valid_email');
         if ($this->form_validation->run() == FALSE){
             $this->load->view('register');
         }else{
@@ -48,7 +48,7 @@ class TaskManager extends CI_Controller{
                 'email'=>$this->input->post('email')
             );
             $this->Task_Model->insert_user_data($data);
-            //redirect(); sa login
+            redirect(base_url()); 
         }
     }
     // check if username already exist when registering
@@ -57,10 +57,16 @@ class TaskManager extends CI_Controller{
         {  
             return true;  
         } else {  
-            $this->form_validation->set_message('register_username_check', 'Username already exist');  
+            $this->form_validation->set_message('register_user_check', 'Username already exist');  
             return false;  
         }  
     }
+    // form validation that accepts alphabets and space
+    function alpha_space($str)
+    {
+        $this->form_validation->set_message('alpha_space', 'The %s field may only contain letters and spaces');
+        return ( ! preg_match("/^([a-z ])+$/i", $str)) ? FALSE : TRUE;
+    } 
     public function tasks($offset=0){
         print($this->Task_Model->fetch_data());
         $config['base_url']=base_url().'/TaskManager/tasks/';
@@ -103,6 +109,11 @@ class TaskManager extends CI_Controller{
     public function profile(){
         $data['info'] = $this->Task_Model->show_data();
         $this->load->view('view_profile',$data);
+    }
+    // if logout button clicked
+    public function logout(){
+        $this->session->unset_userdata('username');
+        redirect(base_url()); 
     }
 }
 ?>
