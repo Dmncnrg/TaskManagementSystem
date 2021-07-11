@@ -16,9 +16,8 @@ class TaskManager extends CI_Controller{
         $this->load->view('register');
     }
     public function tasks($offset=0){
-        print($this->Task_Model->fetch_data());
         $config['base_url']=base_url().'/TaskManager/tasks/';
-        $config['total_rows']= $this->Task_Model->CountAll();
+        //$config['total_rows']= $this->Task_Model->CountAll();
         $config['per_page']=4;
 
         $config['first_link'] = 'FIRST';
@@ -45,17 +44,30 @@ class TaskManager extends CI_Controller{
 
         $this->pagination->initialize($config);
         
-        $data['list'] = $this->Admin_Model->fetch_data($config['per_page'],$offset);
-        $this->load->view('AdminView',$data);
+        //$data['list'] = $this->Admin_Model->fetch_data($config['per_page'],$offset);
+        //$this->load->view('AdminView',$data);
+        $this->load->view('task_list');
     }
+    public function profile(){
+        $this->load->view('view_profile');
+    }
+    public function create_task(){
 
+    }
+    public function edit_task(){
+        $this->load->view('update_task');
+    }
+    public function delete_task(){
+
+    }
+    public function logout(){
+
+    }
     public function check_table(){ //run this para macheck yung table (localhost/taskmanagementsystem/taskmanager/check_table)
         echo "Count: ".$this->Task_Model->count_fetch_data()."<br>"; //change table niyo na lang sa model if user or task table
         $data['info'] = $this->Task_Model->show_data(); //change table niyo na lang sa model if user or task table
         $this->load->view('table_content',$data);
     }
-        public function profile(){
-        $this->load->view('view_profile');
-        }
+    
 }
 ?>
