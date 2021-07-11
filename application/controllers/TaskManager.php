@@ -15,7 +15,8 @@ class TaskManager extends CI_Controller{
         if ($this->form_validation->run() == FALSE){
             $this->load->view('login');
         }else{
-            $this->session->set_userdata(array('username' => $this->input->post('user')));
+            $user = $this->Task_Model->get_user($this->input->post('user'));
+            $this->session->set_userdata(array('userinfo' => $user));
             redirect(base_url()."TaskManager/tasks");
         }
     }
@@ -103,14 +104,11 @@ class TaskManager extends CI_Controller{
     public function create_task(){
 
     }
-    public function edit_task(){
+    public function edit_task(){ //loads edit task screen
         $this->load->view('update_task');
     }
-    public function delete_task(){
-
-    }
-    public function logout(){
-
+    public function delete_task(){ //delete task
+        
     }
     public function check_table(){ //run this para macheck yung table (localhost/taskmanagementsystem/taskmanager/check_table)
         echo "Count: ".$this->Task_Model->count_fetch_data()."<br>"; //change table niyo na lang sa model if user or task table
@@ -123,8 +121,8 @@ class TaskManager extends CI_Controller{
     }
     // if logout button clicked
     public function logout(){
-        $this->session->unset_userdata('username');
-        redirect(base_url()); 
+        $this->session->unset_userdata('userinfo');
+        redirect(); 
     }
 }
 ?>

@@ -25,24 +25,27 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-2 px-1 bg-light position-fixed tasknav" id="sticky-sidebar">
+        <div class="col-2 px-1 bg-light position-fixed tasknav" style="height:100%;" id="sticky-sidebar">
           <div class="container-fluid">
-            <a href="#" class="navbar-brand">Task Management System</a>
+            <a href="#" class="navbar-brand">Task Manager</a>
             <div class="row-auto flex-row align-content-center">
-                <img class="rounded-circle" src="../images/profile_default.jpg" width="150" height="150">
-                <h2>Username</h2>
+                <img class="rounded-circle" src="../images/<?php echo $_SESSION['userinfo'][0]->profile_pic; ?>" width="150" height="150">
+                <h2><?php
+                echo $_SESSION['userinfo'][0]->username;
+                
+                ?></h2>
               </div>
               <div class="row-auto">
                 <nav class="navbar navbar-text">
                     <ul class="navbar-nav">
                       <li class="nav-item">
-                        <a href="#" class="nav-link active">Dashboard</a>
+                        <a href="tasks" class="nav-link active">Dashboard</a>
                       </li>
                       <li class="nav-item">
-                        <a href="#" class="nav-link active">View Profile</a>
+                        <a href="profile" class="nav-link active">View Profile</a>
                       </li>
                       <li class="nav-item">
-                        <a href="#" class="nav-link">Logout</a>
+                        <a href="logout" class="nav-link">Logout</a>
                       </li>
                     </ul>
                 </nav>
