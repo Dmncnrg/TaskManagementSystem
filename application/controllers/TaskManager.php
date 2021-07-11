@@ -68,6 +68,9 @@ class TaskManager extends CI_Controller{
         $data['info'] = $this->Task_Model->show_data(); //change table niyo na lang sa model if user or task table
         $this->load->view('table_content',$data);
     }
-    
+        public function profile(){
+            $data['info'] = $this->Task_Model->show_data();
+            $this->load->view('view_profile',$data);
+        }
 }
 ?>
