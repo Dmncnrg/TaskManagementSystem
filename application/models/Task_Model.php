@@ -78,5 +78,17 @@ class Task_Model extends CI_Model{
         $query = $this->db->get('tbl_user'); //change niyo lang table name if user or task table
         return $query->result();
     }
+    public function create_task($data){ //creating task function
+        $this->db->insert('tbl_task',$data);
+    }
+    public function get_task($id){
+        $this->db->where('id',$id);
+        $query = $this->db->get('tbl_task');
+        return $query->result();
+    }
+    public function update_task($id, $data){
+        $this->db->where('id',$id);
+        $this->db->update('tbl_task',$data);
+    }
 }
 ?>

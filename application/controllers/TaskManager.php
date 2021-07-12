@@ -107,10 +107,42 @@ class TaskManager extends CI_Controller{
         $this->load->view('task_list',$data);
     }
     public function create_task(){
-        $this->load->view('create_task');
+        $this->form_validation->set_rules('taskname', 'Task', 'trim|required');
+        $this->form_validation->set_rules('desc', 'Description', 'trim|required');
+        $this->form_validation->set_rules('start', 'Start Date', 'trim|required');
+        $this->form_validation->set_rules('due', 'Due Date', 'trim|required');
+        if ($this->form_validation->run() == FALSE){
+            $this->load->view('create_task');
+        }else{
+             $data = array(
+                'user'=>$this->session->userdata('username'),
+                'task'=>$this->input->post('taskname'),
+                'description'=>$this->input->post('desc'),
+                'task_start'=>$this->input->post('start'),
+                'task_due'=>$this->input->post('due')
+            );
+            $this->Task_Model->create_task($data);
+            redirect(base_url()."TaskManager/tasks");
     }
+}
     public function edit_task($id){ //loads edit task screen
-        $this->load->view('update_task');
+        $this->form_validation->set_rules('taskname', 'Task', 'trim|required');
+        $this->form_validation->set_rules('desc', 'Description', 'trim|required');
+        $this->form_validation->set_rules('start', 'Start Date', 'trim|required');
+        $this->form_validation->set_rules('due', 'Due Date', 'trim|required');
+        if ($this->form_validation->run() == FALSE){
+            $data['list'] = $this->Task_Model->get_task($id);
+            $this->load->view('update_task', $data);
+        }else{
+             $data = array(
+                'task'=>$this->input->post('taskname'),
+                'description'=>$this->input->post('desc'),
+                'task_start'=>$this->input->post('start'),
+                'task_due'=>$this->input->post('due')
+            );
+            $this->Task_Model->update_task($id, $data);
+            redirect(base_url()."TaskManager/tasks");
+        }
     }
     public function delete_task($id){ //delete task
         $this->Task_Model->delete_user($id);
