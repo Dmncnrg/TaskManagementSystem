@@ -16,7 +16,7 @@ class TaskManager extends CI_Controller{
             $this->load->view('login');
         }else{
             $user = $this->Task_Model->get_user($this->input->post('user'));
-            $this->session->set_userdata(array('userinfo' => $user));
+            $this->session->set_userdata(array('userinfo' => $user, 'username' => $this->input->post('user')));
             redirect(base_url()."TaskManager/tasks");
         }
     }
@@ -70,8 +70,8 @@ class TaskManager extends CI_Controller{
     } 
     public function tasks($offset=0){
         $config['base_url']=base_url().'/TaskManager/tasks/';
-        //$config['total_rows']= $this->Task_Model->CountAll();
-        $config['per_page']=4;
+        $config['total_rows']= $this->Task_Model->CountAll();
+        $config['per_page']=5;
 
         $config['first_link'] = 'FIRST';
         $config['first_tag_open'] = '<li class="page-link">';
@@ -96,19 +96,25 @@ class TaskManager extends CI_Controller{
         $config['num_tag_close'] = '</li>';
 
         $this->pagination->initialize($config);
-        
-        //$data['list'] = $this->Admin_Model->fetch_data($config['per_page'],$offset);
-        //$this->load->view('AdminView',$data);
-        $this->load->view('task_list');
+
+        //Automated Task Status changing
+        $data['alltasks'] = $this->Task_Model->fetch_task();
+        $this->Task_Model->task_status($data);
+
+        //loads pagination
+        $username = $this->session->userdata('username');
+        $data['list'] = $this->Task_Model->fetch_data($config['per_page'],$offset,$username);
+        $this->load->view('task_list',$data);
     }
     public function create_task(){
-
+        $this->load->view('create_task');
     }
-    public function edit_task(){ //loads edit task screen
+    public function edit_task($id){ //loads edit task screen
         $this->load->view('update_task');
     }
-    public function delete_task(){ //delete task
-        
+    public function delete_task($id){ //delete task
+        $this->Task_Model->delete_user($id);
+        redirect(base_url()."TaskManager/tasks");
     }
     public function check_table(){ //run this para macheck yung table (localhost/taskmanagementsystem/taskmanager/check_table)
         echo "Count: ".$this->Task_Model->count_fetch_data()."<br>"; //change table niyo na lang sa model if user or task table

@@ -31,23 +31,49 @@ class Task_Model extends CI_Model{
     //save user on session after login
     public function get_user($user){
         $this->db->where('username',$user);
-        return $this->db->get('tbl_user')->result();
+        $query = $this->db->get('tbl_user');
+        return $query->result();
     }
-
 
     public function count_fetch_data(){ //pangtest lang kung ilan na laman ng table
         $query = $this->db->get('tbl_user'); //change niyo lang table name if user or task table
         return $query->num_rows();
     }
-    public function fetch_data($limit,$offset){ //Pagination (Homepage)
+    public function fetch_data($limit,$offset,$username){ //Pagination (Homepage)
         $this->db->limit($limit);
         $this->db->offset($offset);
-        $result = $this->db->get('tbluser')->result();
+        $this->db->where('user',$username);
+        $result = $this->db->get('tbl_task')->result();
         return $result;
     }
     public function CountAll(){ //Pagination function
-        return $this->db->get('tbluser')->num_rows();
+        return $this->db->get('tbl_user')->num_rows();
     }
+
+    public function fetch_task(){ //fetch changing task status
+        $query = $this->db->get('tbl_task');
+        return $query->result();
+    }
+    public function task_status($task){ //automated task_status change
+        $isUpdate = false;
+        foreach($task['alltasks'] as $tasks){
+            if(strtotime($tasks->task_start) <= strtotime(date("Y-m-d")) && strtotime($tasks->task_due) > strtotime(date("Y-m-d"))){
+                $tasks->task_status = "On Progress";
+                $isUpdate = true;
+            }elseif(strtotime($tasks->task_start) <= strtotime(date("Y-m-d")) && strtotime($tasks->task_due) >= strtotime(date("Y-m-d"))){
+                $tasks->task_status = "Done";
+                $isUpdate = true;
+            }
+            if($isUpdate){
+                $this->update_task_status($tasks);
+                $isUpdate = false;
+            }
+        }
+    }
+    public function update_task_status($task){
+        $this->db->where('id',$task->id);
+        $this->db->update('tbl_task',$task);
+    } 
     public function show_data(){ //pang show ng laman ng table
         $query = $this->db->get('tbl_user'); //change niyo lang table name if user or task table
         return $query->result();
