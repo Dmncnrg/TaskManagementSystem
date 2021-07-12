@@ -46,8 +46,9 @@ class Task_Model extends CI_Model{
         $result = $this->db->get('tbl_task')->result();
         return $result;
     }
-    public function CountAll(){ //Pagination function
-        return $this->db->get('tbl_user')->num_rows();
+    public function CountAll($user){ //Pagination function
+        $this->db->where('user',$user);
+        return $this->db->get('tbl_task')->num_rows();
     }
 
     public function fetch_task(){ //fetch changing task status
@@ -89,6 +90,10 @@ class Task_Model extends CI_Model{
     public function update_task($id, $data){
         $this->db->where('id',$id);
         $this->db->update('tbl_task',$data);
+    }
+    public function delete_task($id){
+        $this->db->where('id',$id);
+        $this->db->delete('tbl_task');
     }
 }
 ?>

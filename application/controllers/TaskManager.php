@@ -1,19 +1,20 @@
 <?php
 /*
-
 *******************************NOTES***************************************
 - Website URL: localhost/taskmanagementsystem
-- call niyo lang si Task_Model if mag-access ng Model (no need na yung $this->load->model('Task_Model');)
-- no need na ideclare yung mga $this->load->library('session'); / $this->load->library('form_validation'); / $this->load->helper(array('form', 'url'));
-
 */
+
 class TaskManager extends CI_Controller{
-    // login screen
+    //login screen
     public function index(){ 
         $this->form_validation->set_rules('user', 'Username', 'trim|required|callback_login_user_check');
         $this->form_validation->set_rules('pw', 'Password', 'trim|required');
         if ($this->form_validation->run() == FALSE){
-            $this->load->view('login');
+            if(!empty($this->session->userdata('userinfo'))){
+                redirect(base_url()."TaskManager/tasks");
+            }else{
+                $this->load->view('login');
+            }
         }else{
             $user = $this->Task_Model->get_user($this->input->post('user'));
             $this->session->set_userdata(array('userinfo' => $user, 'username' => $this->input->post('user')));
@@ -39,17 +40,46 @@ class TaskManager extends CI_Controller{
         $this->form_validation->set_rules('cpw', 'Password Confirmation', 'trim|required|matches[pw]');
         $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[8]|valid_email');
         if ($this->form_validation->run() == FALSE){
-            $this->load->view('register');
+            if(!empty($this->session->userdata('userinfo'))){
+                redirect(base_url()."TaskManager/tasks");
+            }else{
+                $this->load->view('register',array('error'=>''));
+            }
         }else{
-             $data = array(
+            $img = $this->input->post('image');
+            $data = array(
                 'fname'=>$this->input->post('fname'),
                 'lname'=>$this->input->post('lname'),
                 'username'=>$this->input->post('user'),
                 'password'=>$this->input->post('pw'),
-                'email'=>$this->input->post('email')
+                'email'=>$this->input->post('email'),
+                'profile_pic'=> $this->session->flashdata('pfp')
             );
             $this->Task_Model->insert_user_data($data);
             redirect(base_url()); 
+        }
+    }
+    //uploading image function
+    public function do_upload(){
+        $config['image_library']        = 'gd2';
+        $config['upload_path']          = 'C:/xampp/htdocs/taskmanagementsystem/images/';
+        $config['allowed_types']        = 'jpg|png';
+        $config['maintain_ratio']       = TRUE;
+        $config['height']               = 150;
+        $config['width']                = 150;
+        $this->load->library('image_lib',$config);
+        $this->image_lib->resize();
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload('image'))
+        {
+            $error = array('error' => $this->upload->display_errors('<p>','</p>'));
+            $this->load->view('register',$error);
+        }
+        else
+        {
+            $image = $this->upload->data();
+            $this->session->set_flashdata(array('pfp' => $image['file_name']));
+            $this->register(); 
         }
     }
     // check if username already exist when registering
@@ -70,9 +100,9 @@ class TaskManager extends CI_Controller{
     } 
     public function tasks($offset=0){
         $config['base_url']=base_url().'/TaskManager/tasks/';
-        $config['total_rows']= $this->Task_Model->CountAll();
+        $config['total_rows']= $this->Task_Model->CountAll($this->session->userdata('username'));
         $config['per_page']=5;
-
+        $this->session->set_userdata(array('task_page'=>$offset,'total'=>$config['total_rows']));
         $config['first_link'] = 'FIRST';
         $config['first_tag_open'] = '<li class="page-link">';
         $config['first_tag_close'] = '</li>';
@@ -145,7 +175,7 @@ class TaskManager extends CI_Controller{
         }
     }
     public function delete_task($id){ //delete task
-        $this->Task_Model->delete_user($id);
+        $this->Task_Model->delete_task($id);
         redirect(base_url()."TaskManager/tasks");
     }
     public function check_table(){ //run this para macheck yung table (localhost/taskmanagementsystem/taskmanager/check_table)
@@ -159,8 +189,8 @@ class TaskManager extends CI_Controller{
     }
     // if logout button clicked
     public function logout(){
-        $this->session->unset_userdata('userinfo');
-        redirect(); 
+        $this->session->sess_destroy();
+        redirect(base_url()); 
     }
 }
 ?>

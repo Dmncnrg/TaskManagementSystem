@@ -8,22 +8,18 @@
         <?php include 'sidenav.php'; ?>
         <div class="col offset-2" id="main">
             <div class="container">
+                <h1>Edit Task</h1>
                 <form action="" method="post">
+                    
                   <?php
                   foreach($list as $i){
-                    echo "taskname: ".$i->task."<br>";
-                    echo "desc: ".$i->description."<br>";
-                    echo "start: ".$i->task_start."<br>";
-                    echo "due: ".$i->task_due."<br>";
+                    echo '<h4>Task:</h4><input type="text" class="form-control" name="taskname" value="'.$i->task.'">';
+                    echo '<h4>Description:</h4><input type="text" class="form-control" name="desc" value="'.$i->description.'">';
+                    echo '<h4>Task Start:</h4><input type="date" min="'.date('Y-m-d').'" name="start" value="'.$i->task_start.'">';
+                    echo '<h4>Task Due:</h4><input type="date" min="'.date('Y-m-d').'" name="due" value="'.$i->task_due.'">';
                 }
                   ?>
-                    <b>Task</b> <br>
-                    <input type="text" name="taskname"><br>
-                    <b>Description</b><br>
-                    <input type="text" name="desc"><br>
-                    <input type="date" min="<?php echo date('Y-m-d');?>" name="start" required>
-                    <input type="date" min="<?php echo date('Y-m-d');?>" name="due" required> 
-                    <input type="submit" name="Update" value="Update">
+                    <br><input type="submit" class="btn btn-primary" name="Update" value="Update">
                 </form>
             </div>
         </div>
