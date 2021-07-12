@@ -10,13 +10,15 @@
             <div class="container">
                 <form action="" method="post">
                     <h1>Create Task</h1>
-                    <b>Task</b> <br>
-                    <input type="text" name="taskname"><br>
-                    <b>Description</b><br>
-                    <input type="text" name="desc"><br>
+                    <h4>Task:</h4> 
+                    <input type="text" class="form-control" name="taskname"><br>
+                    <h4>Description:</h4>
+                    <input type="text" class="form-control" name="desc"><br>
+                    <h4>Task Start:</h4>
                     <input type="date" min="<?php echo date('Y-m-d');?>" name="start">
-                    <input type="date" min="<?php echo date('Y-m-d');?>" name="due"> 
-                    <input type="submit" name="Create" value="Create">
+                    <h4>Task Due:</h4>
+                    <input type="date" min="<?php echo date('Y-m-d');?>" name="due"><br>
+                    <input type="submit" class="btn btn-primary" name="Create" value="Create">
                 </form>
             </div>
         </div>

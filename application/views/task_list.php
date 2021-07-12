@@ -14,19 +14,27 @@
 <body>
 <div class="container-fluid">
   <div class="row">
-      <?php include 'sidenav.php'; ?>
+      <?php 
+      $_SESSION['page'] = false;
+      if(count($list)>5){
+        $_SESSION['page'] = true;
+      }
+      include 'sidenav.php'; ?>
       <div class="col offset-2" id="main">
         <div class="container">
           <h1>Task Table</h1>
           <div class="row d-flex justify-content-between">
             <div class="col-auto">
-              <p>Some Information</p>
+              <p>Welcome!!!</p>
             </div>
             <div class="col-auto">
               <button class="btn btn-primary" onclick="document.location='create_task'">Create Task</button>
             </div>
           </div>
           <table class="table table-bordered">
+              <caption><?php
+              echo $_SESSION['total']." tasks"; 
+              ?></caption>
               <thead class="thead-light">
               <tr>
                 <th class="p-2">#</th>
@@ -47,7 +55,7 @@
                 Done - Success
                 
                 */
-                  $id = 1;
+                  $id = $_SESSION['task_page'] + 1;
                   if(empty($list)){
                     echo '<tr><td style="text-align:center;" colspan="7">Create new task</td></tr>';
                   }
@@ -56,7 +64,7 @@
                     switch($l->task_status){
                       case('Pending'): $tr = "bg-default"; break;
                       case('On Progress'): $tr = "bg-warning"; break;
-                      case('Done'): $tr = "bg-Success"; break;
+                      case('Done'): $tr = "bg-success"; break;
                     }
                     echo '<tr class="'.$tr.'">';
                     echo '<td class="p-2">'.$id.'</td>';
@@ -72,8 +80,8 @@
                       </a>
 
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">';
-                        echo '<a class="dropdown-item" href="edit_task/'.$l->id.'">Edit</a>';
-                        echo '<a class="dropdown-item" href="delete_task/'.$l->id.'">Delete</a>';
+                        echo '<a class="dropdown-item" href="'.base_url().'TaskManager/edit_task/'.$l->id.'">Edit</a>';
+                        echo '<a class="dropdown-item" href="'.base_url().'TaskManager/delete_task/'.$l->id.'">Delete</a>';
                     echo '</div>
                     </div></td>';
                     echo '</tr>';
@@ -82,12 +90,17 @@
                 ?>
             </tbody>
           </table>
+          <?php
+          if(!empty($list)){
+          ?>
           <div>
-          <ul class='pagination d-flex justify-content-center'>
-              <?php echo $this->pagination->create_links();?>
-          </ul>
-          
-        </div>
+            <ul class='pagination d-flex justify-content-center'>
+              <?php echo $this->pagination->create_links(); ?>
+           </ul>
+          </div>
+          <?php
+          }
+          ?>
       </div>
   </div>
 </div>

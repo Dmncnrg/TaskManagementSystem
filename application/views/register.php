@@ -1,25 +1,29 @@
-<html>
-    <head>
+<?php
+include 'head.php';
+?>
         <title>Registration Form</title>
     </head>
 <body>
-    <div>
-        <?php echo validation_errors(); ?>
-        <form action="" method="post">
+    <div class="container">
+        <?php echo validation_errors(); 
+        echo $error;
+        ?>
+        <form action="do_upload" method="post" enctype="multipart/form-data">
             <h1>Register</h1>
-            <b>First Name</b> <br>
-            <input type="text" name="fname"><br>
-            <b>Last Name</b><br>
-            <input type="text" name="lname"><br>
-            <b>Username</b><br>
-            <input type="text" name="user"><br>
-            <b>Password</b><br>
-            <input type="password" name="pw"><br>
-            <b>Confirm Password</b><br>
-            <input type="password" name="cpw"><br>
-            <b>Email</b><br>
-            <input type="email" name="email"><br>
-            <input type="submit" name="Submit" value="Submit">
+            <h4>First Name</h4>
+            <input type="text" class="form-control" name="fname"><br>
+            <h4>Last Name</h4>
+            <input type="text" class="form-control" name="lname"><br>
+            <h4>Username</h4>
+            <input type="text" class="form-control" name="user"><br>
+            <h4>Password</h4>
+            <input type="password" class="form-control" name="pw"><br>
+            <h4>Confirm Password</h4>
+            <input type="password" class="form-control" name="cpw"><br>
+            <h4>Email</h4>
+            <input type="email" class="form-control" name="email"><br>
+            <input type="file" name="image"> <br>
+            <input type="submit" class="btn btn-primary" name="Submit" value="Submit">
         </form>
     </div>
 </body>

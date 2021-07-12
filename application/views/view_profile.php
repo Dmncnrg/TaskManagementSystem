@@ -8,6 +8,7 @@
 </head>
 <body> 
 <?php 
+include 'sidenav.php';
 $id = $_SESSION['userinfo'][0]->id;
 $fname = $_SESSION['userinfo'][0]->fname;
 $lname = $_SESSION['userinfo'][0]->lname;
@@ -15,7 +16,6 @@ $username = $_SESSION['userinfo'][0]->username;
 $password = $_SESSION['userinfo'][0]->password;
 $email = $_SESSION['userinfo'][0]->email;
 $profile_pic = $_SESSION['userinfo'][0]->profile_pic;
-include 'sidenav.php';
 ?>
 <div class="col offset-2" id="main">
     <div class="container">

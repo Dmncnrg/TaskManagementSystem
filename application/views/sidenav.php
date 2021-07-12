@@ -1,3 +1,6 @@
+<?php
+include 'block.php';
+?>
 <div class="col-2 px-1 bg-light position-fixed tasknav" style="height:100%;" id="sticky-sidebar">
           <div class="container-fluid">
             <a href="#" class="navbar-brand">Task Manager</a>

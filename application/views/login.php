@@ -1,16 +1,18 @@
-<html>
-    <head>
+<?php
+
+include 'head.php';
+?>
         <title>Login Form</title>
     </head>
 <body>
-    <div>
+    <div class="container">
+        <h1>Login Page</h1><br>
         <?php echo validation_errors(); ?>
-        <b>Login Page</b><br>
         <form action="" method="post">
-            <b>Username</b><br><input type="text" name="user" value=""><br>
-            <b>Password</b><br><input type="password" name="pw" value=""><br>
-            <a href="TaskManager/register">Register</a></div>
-            <input type="submit" name="Submit"><br>
+            <h4>Username</h4><input type="text" class="form-control" name="user" value=""><br>
+            <h4>Password</h4><input type="password" class="form-control" name="pw" value=""><br>
+            <a href="TaskManager/register">Register</a><br>
+            <input type="submit" class="btn btn-primary" name="Submit">
         </form>
     </div>
 </body>
