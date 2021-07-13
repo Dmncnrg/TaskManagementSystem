@@ -28,7 +28,7 @@ class TaskManager extends CI_Controller{
         {  
             return true;  
         } else {  
-            $this->form_validation->set_message('login_user_check', 'Invalid username or password!');  
+            $this->form_validation->set_message('login_user_check', '**Invalid username or password!');  
             return false;  
         }  
     }
