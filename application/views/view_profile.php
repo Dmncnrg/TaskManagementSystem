@@ -1,9 +1,7 @@
 <?php include 'head.php'; ?>
 <title>View Profile</title> 
 <style> 
-    body{ 
-        background-image: url('../images/background.jpg'); 
-    }
+
 </style>
 </head>
 <body> 
@@ -42,8 +40,6 @@ $profile_pic = $_SESSION['userinfo'][0]->profile_pic;
 </div> 
 </body> 
 </html>
-
-// H1 my information css (optional)
 <!-- h1 {
     width:500px;
     margin: 0 auto;

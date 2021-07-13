@@ -9,6 +9,26 @@
       .tasknav{
         padding:10px;
       }
+      .task-button .btn-task{
+        border-radius: 30px;
+        padding: 10px 20px;
+        font-size: 18px;
+        font-weight: bold;
+        background-color: #5791ff;
+        border: 1px solid #5791ff;
+        color: white;
+        margin-top: 20px;
+      }
+      .task-button .btn-task:hover{
+        background-color: #fff;
+        border: 1px solid #5791ff ;
+        color: #5791ff;
+      }
+
+      .table-heads{
+        background-color: #5791ff;
+        color: #fff;
+      }
       </style>
 </head>
 <body>
@@ -21,21 +41,25 @@
       }
       include 'sidenav.php'; ?>
       <div class="col offset-2" id="main">
-        <div class="container">
-          <h1>Task Table</h1>
+        <div class="container mt-5">
+          <h2> <b>Task Table</b></h2>
           <div class="row d-flex justify-content-between">
             <div class="col-auto">
-              <p>Welcome!!!</p>
+              <h5>Welcome 
+              <?php
+                echo $_SESSION['userinfo'][0]->fname;
+                ?>
+              </h5>
             </div>
-            <div class="col-auto">
-              <button class="btn btn-primary" onclick="document.location='create_task'">Create Task</button>
+            <div class="col-auto mb-3 task-button">
+              <button class="btn btn-primary btn-task" onclick="document.location='create_task'"><i class="fas fa-plus-circle mr-2"></i>Create Task</button>
             </div>
           </div>
-          <table class="table table-bordered">
+          <table class="table shadow p-3 mb-5 bg-body">
               <caption><?php
               echo $_SESSION['total']." tasks"; 
               ?></caption>
-              <thead class="thead-light">
+              <thead class="table-heads">
               <tr>
                 <th class="p-2">#</th>
                 <th class="p-2">Task</th>
@@ -63,8 +87,8 @@
                     $tr = "";
                     switch($l->task_status){
                       case('Pending'): $tr = "bg-default"; break;
-                      case('On Progress'): $tr = "bg-warning"; break;
-                      case('Done'): $tr = "bg-success"; break;
+                      case('On Progress'): $tr = "table-active"; break;
+                      case('Done'): $tr = "table-success"; break;
                     }
                     echo '<tr class="'.$tr.'">';
                     echo '<td class="p-2">'.$id.'</td>';

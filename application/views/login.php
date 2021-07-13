@@ -1,11 +1,11 @@
 <?php
 include 'head.php';
 ?>
-        <title>Login Form</title>
+    <title>Login Form</title>
     </head>
 <body>
     <div class="container d-flex flex-column min-vh-100 justify-content-center align-items-center">
-    <div class="login-form ">
+    <div class="login-form">
         <form action="" method="post">
             <div class="form-icon">
                 <span><i class="fas fa-tasks"></i></span>

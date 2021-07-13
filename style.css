@@ -41,7 +41,7 @@
     font-size: 18px;
     font-weight: bold;
     background-color: #5791ff;
-    border: none;
+    border: 1px solid #5791ff;
     color: white;
     margin-top: 20px;
 }
@@ -62,7 +62,7 @@
 }
 .login-form .register:hover{
     background-color: #5791ff;
-    border: 2px solid #fff ;
+    border: 1px solid #fff ;
     color: #fff;
 }
 
