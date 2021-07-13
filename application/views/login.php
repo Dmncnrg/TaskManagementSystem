@@ -1,5 +1,4 @@
 <?php
-
 include 'head.php';
 ?>
         <title>Login Form</title>
@@ -11,12 +10,15 @@ include 'head.php';
             <div class="form-icon">
                 <span><i class="fas fa-tasks"></i></span>
             </div>
+            <div class="form-title text-center">
+				<h3>Login</h3>
+				</div>
             <div class="form-group">
-                <input type="text" class="form-control item"  name="user" id="username" placeholder="Username">
+                <input type="text" class="form-control item"  name="user" placeholder="Username">
                 <i style="color:red;"><?php echo form_error('user'); ?></i>
             </div>
             <div class="form-group">
-                <input type="password" class="form-control item"  name="pw" id="password" placeholder="Password">
+                <input type="password" class="form-control item"  name="pw" placeholder="Password">
                 <i style="color:red;"><?php echo form_error('pw'); ?></i>
             </div>
             <div class="form-group">
