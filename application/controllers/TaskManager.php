@@ -11,6 +11,7 @@ class TaskManager extends CI_Controller{
         $this->form_validation->set_rules('pw', 'Password', 'trim|required');
         if ($this->form_validation->run() == FALSE){
             if(!empty($this->session->userdata('userinfo'))){
+                echo "hello";
                 redirect(base_url()."TaskManager/tasks");
             }else{
                 $this->load->view('login');
