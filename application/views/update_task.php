@@ -6,9 +6,8 @@
 		max-width: 600px;
 		margin: auto;
 		padding: 50px 70px;
-		border-top-left-radius: 30px;
-		border-top-right-radius: 30px;
-		box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+		border-radius: 30px;
+	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.20);
 	}
 	.update-button .btn-update{
 	border-radius: 30px;
@@ -42,7 +41,7 @@
 					<div class="back-button">
 				<a href="<?php echo base_url(); ?>"><span><i class="fas fa-chevron-left"></i></span></a>
 			</div>
-                    <h2 class="text-center">Edit Task</h2>
+                    <h3 class="text-center">Edit Task</h3>
 					<form action="" method="post" class="mt-3">
 						<?php
                   foreach($list as $i){
