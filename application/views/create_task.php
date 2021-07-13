@@ -45,12 +45,16 @@
                     <h2 class="text-center">Create Task</h2>
                     <h5>Task:</h5> 
                     <input type="text" class="form-control my-3" name="taskname"><br>
+                    <i style="color:red;"><?php echo form_error('taskname'); ?></i>
                     <h5>Description:</h5>
                     <input type="text" class="form-control my-3" name="desc"><br>
+                    <i style="color:red;"><?php echo form_error('desc'); ?></i>
                     <h5>Task Start:</h5>
                     <input type="date" class="my-3" min="<?php echo date('Y-m-d');?>" name="start">
+                    <i style="color:red;"><?php echo form_error('start'); ?></i>
                     <h5>Task Due:</h5>
                     <input type="date" class="my-3" min="<?php echo date('Y-m-d');?>" name="due"><br>
+                    <i style="color:red;"><?php echo form_error('due'); ?></i>
                     <div class="create-button text-center mt-2">
 					<button type="submit" class="btn btn-primary btn-create" name="Create" value="Create">Create</button>
                 </div>
