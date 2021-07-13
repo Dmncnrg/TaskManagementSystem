@@ -45,17 +45,17 @@
 					<form action="" method="post" class="mt-3">
 						<?php
                   foreach($list as $i){
-                    echo '<h5>Task:</h5><input type="text" class="form-control my-3" name="taskname" value="'.$i->task.'">';
+                    echo '<h5>Task:</h5><input type="text" class="form-control my-2" name="taskname" value="'.$i->task.'">';
 					echo '<i style="color:red;">'.form_error('taskname').'</i>';
-                    echo '<h5>Description:</h5><input type="text" class="form-control my-3" name="desc" value="'.$i->description.'">';
+                    echo '<h5>Description:</h5><input type="text" class="form-control my-2" name="desc" value="'.$i->description.'">';
 					echo '<i style="color:red;">'.form_error('desc').'</i>';
-                    echo '<h5>Task Start:</h5><input class="my-3" type="date" min="'.date('Y-m-d').'" name="start" value="'.$i->task_start.'">';
+                    echo '<h5>Task Start:</h5><input class="my-2" type="date" min="'.date('Y-m-d').'" name="start" value="'.$i->task_start.'">';
 					echo '<i style="color:red;">'.form_error('start').'</i>';
-                    echo '<h5>Task Due:</h5><input class="my-3" type="date" min="'.date('Y-m-d').'" name="due" value="'.$i->task_due.'">';
+                    echo '<h5>Task Due:</h5><input class="my-2" type="date" min="'.date('Y-m-d').'" name="due" value="'.$i->task_due.'">';
 					echo '<i style="color:red;">'.form_error('due').'</i>';
                     }
                   ?>
-				<div class="update-button text-center">
+				<div class="update-button text-center my-3">
 					<button type="submit" class="btn btn-primary btn-update" value="Update">Update</button>
                 </div>
                 </form>

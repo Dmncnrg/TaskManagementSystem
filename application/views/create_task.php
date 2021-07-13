@@ -6,9 +6,8 @@
 		max-width: 600px;
 		margin: auto;
 		padding: 50px 70px;
-		border-top-left-radius: 30px;
-		border-top-right-radius: 30px;
-		box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+        border-radius: 30px;
+		box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.20);
     }
     .back-button{
 		font-size: 1.5rem;
@@ -42,20 +41,20 @@
 				<a href="<?php echo base_url(); ?>"><span><i class="fas fa-chevron-left"></i></span></a>
 			</div>
                 <form action="" method="post">
-                    <h2 class="text-center">Create Task</h2>
+                    <h3 class="text-center">Create Task</h3>
                     <h5>Task:</h5> 
-                    <input type="text" class="form-control my-3" name="taskname"><br>
+                    <input type="text" class="form-control my-2" name="taskname"><br>
                     <i style="color:red;"><?php echo form_error('taskname'); ?></i>
                     <h5>Description:</h5>
-                    <input type="text" class="form-control my-3" name="desc"><br>
+                    <input type="text" class="form-control my-2" name="desc"><br>
                     <i style="color:red;"><?php echo form_error('desc'); ?></i>
                     <h5>Task Start:</h5>
-                    <input type="date" class="my-3" min="<?php echo date('Y-m-d');?>" name="start">
+                    <input type="date" class="mb-3" min="<?php echo date('Y-m-d');?>" name="start">
                     <i style="color:red;"><?php echo form_error('start'); ?></i>
                     <h5>Task Due:</h5>
-                    <input type="date" class="my-3" min="<?php echo date('Y-m-d');?>" name="due"><br>
+                    <input type="date" class="my-2" min="<?php echo date('Y-m-d');?>" name="due"><br>
                     <i style="color:red;"><?php echo form_error('due'); ?></i>
-                    <div class="create-button text-center mt-2">
+                    <div class="create-button text-center mt-3">
 					<button type="submit" class="btn btn-primary btn-create" name="Create" value="Create">Create</button>
                 </div>
                 </form>
