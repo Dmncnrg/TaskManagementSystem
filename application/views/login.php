@@ -22,7 +22,7 @@ include 'head.php';
                 <i style="color:red;"><?php echo form_error('pw'); ?></i>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-block create-account" name="Submit">Create Account</button>
+                <button type="submit" class="btn btn-block create-account" name="Submit">Login</button>
             </div>
             <div class="row">
             <div class="col"><hr></div>

@@ -52,7 +52,7 @@
               </h5>
             </div>
             <div class="col-auto mb-3 task-button">
-              <button class="btn btn-primary btn-task" onclick="document.location='create_task'"><i class="fas fa-plus-circle mr-2"></i>Create Task</button>
+              <button class="btn btn-primary btn-task" onclick="document.location='<?php echo base_url();?>TaskManager/create_task'"><i class="fas fa-plus-circle mr-2"></i>Create Task</button>
             </div>
           </div>
           <table class="table shadow p-3 mb-5 bg-body">
