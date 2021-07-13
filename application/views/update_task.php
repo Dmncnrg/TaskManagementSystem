@@ -6,9 +6,8 @@
 		max-width: 600px;
 		margin: auto;
 		padding: 50px 70px;
-		border-top-left-radius: 30px;
-		border-top-right-radius: 30px;
-		box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+		border-radius: 30px;
+	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.20);
 	}
 	.update-button .btn-update{
 	border-radius: 30px;
@@ -42,17 +41,17 @@
 					<div class="back-button">
 				<a href="<?php echo base_url(); ?>"><span><i class="fas fa-chevron-left"></i></span></a>
 			</div>
-                    <h2 class="text-center">Edit Task</h2>
+                    <h3 class="text-center">Edit Task</h3>
 					<form action="" method="post" class="mt-3">
 						<?php
                   foreach($list as $i){
-                    echo '<h5>Task:</h5><input type="text" class="form-control my-3" name="taskname" value="'.$i->task.'">';
-                    echo '<h5>Description:</h5><input type="text" class="form-control my-3" name="desc" value="'.$i->description.'">';
-                    echo '<h5>Task Start:</h5><input class="my-3" type="date" min="'.date('Y-m-d').'" name="start" value="'.$i->task_start.'">';
-                    echo '<h5>Task Due:</h5><input class="my-3" type="date" min="'.date('Y-m-d').'" name="due" value="'.$i->task_due.'">';
+                    echo '<h5>Task:</h5><input type="text" class="form-control my-2" name="taskname" value="'.$i->task.'">';
+                    echo '<h5>Description:</h5><input type="text" class="form-control my-2" name="desc" value="'.$i->description.'">';
+                    echo '<h5>Task Start:</h5><input class="my-2" type="date" min="'.date('Y-m-d').'" name="start" value="'.$i->task_start.'">';
+                    echo '<h5>Task Due:</h5><input class="my-2" type="date" min="'.date('Y-m-d').'" name="due" value="'.$i->task_due.'">';
                     }
                   ?>
-				<div class="update-button text-center">
+				<div class="update-button text-center mt-3">
 					<button type="submit" class="btn btn-primary btn-update" value="Update" ">Update</button>
                 </div>
                 </form>
