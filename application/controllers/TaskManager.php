@@ -1,7 +1,7 @@
 <?php
 /*
 *******************************NOTES***************************************
-- Website URL: localhost/taskmanagementsystem
+- Website URL: localhost/TaskManagementSystem
 */
 
 class TaskManager extends CI_Controller{
@@ -98,7 +98,8 @@ class TaskManager extends CI_Controller{
     {
         $this->form_validation->set_message('alpha_space', 'The %s field may only contain letters and spaces');
         return ( ! preg_match("/^([a-z ])+$/i", $str)) ? FALSE : TRUE;
-    } 
+    }
+    //Website Homepage
     public function tasks($offset=0){
         $config['base_url']=base_url().'/TaskManager/tasks/';
         $config['total_rows']= $this->Task_Model->CountAll($this->session->userdata('username'));
@@ -137,6 +138,12 @@ class TaskManager extends CI_Controller{
         $data['list'] = $this->Task_Model->fetch_data($config['per_page'],$offset,$username);
         $this->load->view('task_list',$data);
     }
+    //View Profile Screen
+    public function profile(){
+        $data['info'] = $this->Task_Model->show_data();
+        $this->load->view('view_profile',$data);
+    }
+    //create task screen
     public function create_task(){
         $this->form_validation->set_rules('taskname', 'Task', 'trim|required');
         $this->form_validation->set_rules('desc', 'Description', 'trim|required');
@@ -154,9 +161,10 @@ class TaskManager extends CI_Controller{
             );
             $this->Task_Model->create_task($data);
             redirect(base_url()."TaskManager/tasks");
+        }
     }
-}
-    public function edit_task($id){ //loads edit task screen
+    //loads edit task screen
+    public function edit_task($id){ 
         $this->form_validation->set_rules('taskname', 'Task', 'trim|required');
         $this->form_validation->set_rules('desc', 'Description', 'trim|required');
         $this->form_validation->set_rules('start', 'Start Date', 'trim|required');
@@ -175,18 +183,10 @@ class TaskManager extends CI_Controller{
             redirect(base_url()."TaskManager/tasks");
         }
     }
-    public function delete_task($id){ //delete task
+    //delete task function
+    public function delete_task($id){
         $this->Task_Model->delete_task($id);
         redirect(base_url()."TaskManager/tasks");
-    }
-    public function check_table(){ //run this para macheck yung table (localhost/taskmanagementsystem/taskmanager/check_table)
-        echo "Count: ".$this->Task_Model->count_fetch_data()."<br>"; //change table niyo na lang sa model if user or task table
-        $data['info'] = $this->Task_Model->show_data(); //change table niyo na lang sa model if user or task table
-        $this->load->view('table_content',$data);
-    }
-    public function profile(){
-        $data['info'] = $this->Task_Model->show_data();
-        $this->load->view('view_profile',$data);
     }
     // if logout button clicked
     public function logout(){
