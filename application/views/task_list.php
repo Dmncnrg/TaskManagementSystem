@@ -57,7 +57,7 @@
           </div>
           <table class="table shadow p-3 mb-5 bg-body">
               <caption><?php
-              echo $_SESSION['total']." tasks"; 
+              echo $_SESSION['total']." task(s)"; 
               ?></caption>
               <thead class="table-heads">
               <tr>

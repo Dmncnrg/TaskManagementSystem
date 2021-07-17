@@ -148,7 +148,7 @@ class TaskManager extends CI_Controller{
         $this->form_validation->set_rules('taskname', 'Task', 'trim|required');
         $this->form_validation->set_rules('desc', 'Description', 'trim|required');
         $this->form_validation->set_rules('start', 'Start Date', 'trim|required');
-        $this->form_validation->set_rules('due', 'Due Date', 'trim|required');
+        $this->form_validation->set_rules('due', 'Due Date', 'trim|required|callback_is_validdate');
         if ($this->form_validation->run() == FALSE){
             $this->load->view('create_task');
         }else{
@@ -168,7 +168,7 @@ class TaskManager extends CI_Controller{
         $this->form_validation->set_rules('taskname', 'Task', 'trim|required');
         $this->form_validation->set_rules('desc', 'Description', 'trim|required');
         $this->form_validation->set_rules('start', 'Start Date', 'trim|required');
-        $this->form_validation->set_rules('due', 'Due Date', 'trim|required');
+        $this->form_validation->set_rules('due', 'Due Date', 'trim|required|callback_is_validdate');
         if ($this->form_validation->run() == FALSE){
             $data['list'] = $this->Task_Model->get_task($id);
             $this->load->view('update_task', $data);
@@ -181,6 +181,14 @@ class TaskManager extends CI_Controller{
             );
             $this->Task_Model->update_task($id, $data);
             redirect(base_url()."TaskManager/tasks");
+        }
+    }
+    public function is_validdate(){
+        if(strtotime($this->input->post('start')) > strtotime($this->input->post('due'))){
+            $this->form_validation->set_message('is_validdate', 'Invalid Start date!');
+            return false;
+        }else{
+            return true;
         }
     }
     //delete task function
